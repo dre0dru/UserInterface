@@ -1,0 +1,16 @@
+{
+  "name": "com.dre0dru.screens.service",
+  "version": "1.0.0",
+  "displayName": "ScreensService",
+  "description": "TODO",
+  "unity": "2020.1",
+  "unityRelease": "0f1",
+  "keywords": [
+    "TODO"
+  ],
+  "author": {
+    "name": "Dre0Dru",
+    "url": "https://github.com/dre0dru"
+  },
+  "type": "library"
+}
