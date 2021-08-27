@@ -2,81 +2,99 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Scripting;
 using Object = UnityEngine.Object;
 
 namespace ScreensService.Containers
 {
-    public class SceneScreensContainer<TScreenConstraint> : IScreensContainer<TScreenConstraint>
+    public class SceneScreensContainer<TScreenConstraint, TScreenKey> : MonoBehaviour,
+        IScreensContainer<TScreenConstraint, TScreenKey>
         where TScreenConstraint : Component
     {
-        private readonly Transform _screensRoot;
-        private readonly Dictionary<Type, TScreenConstraint> _rootScreens;
+        [SerializeField]
+        private Transform _screensRoot;
 
-        [RequiredMember]
-        public SceneScreensContainer(Transform screensRoot)
+        private Dictionary<TScreenKey, TScreenConstraint> _rootScreens;
+
+        private void Awake()
         {
-            _screensRoot = screensRoot;
             _rootScreens = FillDictionary();
         }
 
-        public TScreen LoadScreen<TScreen>()
+        public TScreen LoadScreen<TScreen>(TScreenKey screenKey)
             where TScreen : TScreenConstraint
         {
-            return GetScreenFromRoot<TScreen>();
+            return GetScreenFromRoot<TScreen>(screenKey);
         }
 
-        public void UnloadScreen<TScreen>()
-            where TScreen : TScreenConstraint
+        public TScreenConstraint LoadScreen(TScreenKey screenKey)
         {
-            //TODO screenType в метод, наверное internal extension
-            var screenType = typeof(TScreen);
-            if (_rootScreens.TryGetValue(screenType, out var screen))
-            {
-                Object.Destroy(screen.gameObject);
-                _rootScreens.Remove(screenType);
-            }
+            return GetScreenFromRoot(screenKey);
         }
 
-        public bool IsScreenLoaded<TScreen>()
-            where TScreen : TScreenConstraint
-        {
-            return _rootScreens.ContainsKey(typeof(TScreen));
-        }
-        
+        // public void UnloadScreen(TScreenKey screenKey)
+        // {
+        //     if (_rootScreens.TryGetValue(screenKey, out var screen))
+        //     {
+        //         Object.Destroy(screen.gameObject);
+        //         _rootScreens.Remove(screenKey);
+        //     }
+        // }
+
+        // public bool IsScreenLoaded(TScreenKey screenKey)
+        // {
+        //     return _rootScreens.ContainsKey(screenKey);
+        // }
+
         public void Dispose()
         {
             foreach (var screen in _rootScreens.Values)
             {
                 Object.Destroy(screen.gameObject);
             }
-            
+
             _rootScreens.Clear();
         }
 
-        private Dictionary<Type, TScreenConstraint> FillDictionary()
+        private Dictionary<TScreenKey, TScreenConstraint> FillDictionary()
         {
             return _screensRoot.GetComponentsInChildren<TScreenConstraint>()
-                .ToDictionary(screen => screen.GetType());
+                .ToDictionary(screen => screen.GetComponent<SceneScreenKey<TScreenKey>>().ScreenKey);
         }
 
-        private TScreen GetScreenFromRoot<TScreen>()
-            where TScreen : TScreenConstraint
+        private TScreenConstraint GetScreenFromRoot(TScreenKey screenKey)
         {
-            var screenType = typeof(TScreen);
-            if (!_rootScreens.TryGetValue(screenType, out var screen))
+            if (!_rootScreens.TryGetValue(screenKey, out var screen))
             {
-                screen = _screensRoot.GetComponentInChildren<TScreen>();
-                
-                if (screen == null)
+                var key = _screensRoot.GetComponentInChildren<SceneScreenKey<TScreenKey>>();
+                if (key == null)
                 {
-                    throw new ArgumentException($"No screen of type [{screenType}] found in root [{_screensRoot}]");
+                    throw new ArgumentException($"No key [{screenKey}] found in root [{_screensRoot}]");
                 }
-                
-                _rootScreens.Add(screenType, screen);
+
+                if (!key.TryGetComponent<TScreenConstraint>(out screen))
+                {
+                    throw new ArgumentException(
+                        $"No screen associated with key [{key.ScreenKey}] found in root [{_screensRoot}]");
+                }
+
+                _rootScreens.Add(key.ScreenKey, screen);
             }
 
-            return screen.GetComponent<TScreen>();
+            return screen;
+        }
+
+        private TScreen GetScreenFromRoot<TScreen>(TScreenKey screenKey)
+            where TScreen : TScreenConstraint
+        {
+            var screen = GetScreenFromRoot(screenKey);
+
+            if (!screen.TryGetComponent<TScreen>(out var screenTyped))
+            {
+                throw new ArgumentException(
+                    $"Invalid type [{typeof(TScreen)}] for key [{screenKey}] in root [{_screensRoot}]");
+            }
+
+            return screenTyped;
         }
     }
 }

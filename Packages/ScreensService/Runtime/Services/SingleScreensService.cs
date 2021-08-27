@@ -1,23 +1,29 @@
 using UnityEngine;
-using UnityEngine.Scripting;
 
 namespace ScreensService.Services
 {
-    public class SingleScreensService<TScreenConstraint> : IScreensService<TScreenConstraint>
+    public class SingleScreensService<TScreenConstraint, TScreenKey> : IScreensService<TScreenConstraint, TScreenKey>
         where TScreenConstraint : Component
     {
-        private readonly IScreensContainer<TScreenConstraint> _screensContainer;
+        private readonly IScreensContainer<TScreenConstraint, TScreenKey> _screensContainer;
 
-        [RequiredMember]
-        public SingleScreensService(IScreensContainer<TScreenConstraint> screensContainer)
+        #if UNITY_2020_3_OR_NEWER
+        [UnityEngine.Scripting.RequiredMember]
+        #endif
+        public SingleScreensService(IScreensContainer<TScreenConstraint, TScreenKey> screensContainer)
         {
             _screensContainer = screensContainer;
         }
 
-        public TScreen GetScreen<TScreen>()
+        public TScreen GetScreen<TScreen>(TScreenKey screenKey)
             where TScreen : TScreenConstraint
         {
-            return _screensContainer.LoadScreen<TScreen>();
+            return _screensContainer.LoadScreen<TScreen>(screenKey);
+        }
+
+        public TScreenConstraint GetScreen(TScreenKey screenKey)
+        {
+            return _screensContainer.LoadScreen(screenKey);
         }
     }
 }
