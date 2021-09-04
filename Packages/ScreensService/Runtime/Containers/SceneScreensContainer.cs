@@ -20,30 +20,21 @@ namespace ScreensService.Containers
             _rootScreens = FillDictionary();
         }
 
-        public TScreen LoadScreen<TScreen>(TScreenKey screenKey)
+        public TScreen GetOrCreateScreen<TScreen>(TScreenKey screenKey)
             where TScreen : TScreenConstraint
         {
             return GetScreenFromRoot<TScreen>(screenKey);
         }
 
-        public TScreenConstraint LoadScreen(TScreenKey screenKey)
+        public TScreenConstraint GetOrCreateScreen(TScreenKey screenKey)
         {
             return GetScreenFromRoot(screenKey);
         }
 
-        // public void UnloadScreen(TScreenKey screenKey)
-        // {
-        //     if (_rootScreens.TryGetValue(screenKey, out var screen))
-        //     {
-        //         Object.Destroy(screen.gameObject);
-        //         _rootScreens.Remove(screenKey);
-        //     }
-        // }
-
-        // public bool IsScreenLoaded(TScreenKey screenKey)
-        // {
-        //     return _rootScreens.ContainsKey(screenKey);
-        // }
+        public void DisposeScreen(TScreenConstraint screen, TScreenKey screenKey)
+        {
+            return;
+        }
 
         public void Dispose()
         {

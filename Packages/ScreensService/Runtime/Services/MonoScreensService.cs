@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ScreensService.Services
 {
-    public class SingleScreensService<TScreenConstraint, TScreenKey> : IScreensService<TScreenConstraint, TScreenKey>
+    public class MonoScreensService<TScreenConstraint, TScreenKey> : IScreensService<TScreenConstraint, TScreenKey>
         where TScreenConstraint : Component
     {
         private readonly IScreensContainer<TScreenConstraint, TScreenKey> _screensContainer;
@@ -10,7 +10,7 @@ namespace ScreensService.Services
         #if UNITY_2020_3_OR_NEWER
         [UnityEngine.Scripting.RequiredMember]
         #endif
-        public SingleScreensService(IScreensContainer<TScreenConstraint, TScreenKey> screensContainer)
+        public MonoScreensService(IScreensContainer<TScreenConstraint, TScreenKey> screensContainer)
         {
             _screensContainer = screensContainer;
         }
@@ -18,12 +18,17 @@ namespace ScreensService.Services
         public TScreen GetScreen<TScreen>(TScreenKey screenKey)
             where TScreen : TScreenConstraint
         {
-            return _screensContainer.LoadScreen<TScreen>(screenKey);
+            return _screensContainer.GetOrCreateScreen<TScreen>(screenKey);
         }
 
         public TScreenConstraint GetScreen(TScreenKey screenKey)
         {
-            return _screensContainer.LoadScreen(screenKey);
+            return _screensContainer.GetOrCreateScreen(screenKey);
+        }
+
+        public void DisposeScreen(TScreenConstraint screen, TScreenKey screenKey)
+        {
+            _screensContainer.DisposeScreen(screen, screenKey);
         }
     }
 }
