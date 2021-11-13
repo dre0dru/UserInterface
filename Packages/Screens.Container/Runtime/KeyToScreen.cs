@@ -1,6 +1,6 @@
 using System;
 
-namespace ScreensService
+namespace Screens.Container
 {
     [Serializable]
     public struct KeyToScreen<TScreenKey, TScreenConstraint>

@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ScreensService.Containers
+namespace Screens.Container.Containers
 {
-    public class SceneScreensContainer<TScreenConstraint, TScreenKey> : MonoBehaviour,
-        IScreensContainer<TScreenConstraint, TScreenKey>
+    public class InstanceScreensContainer<TScreenKey, TScreenConstraint> : MonoBehaviour,
+        IScreensContainer<TScreenKey, TScreenConstraint>
         where TScreenConstraint : Component
     {
+        
         [SerializeField]
         protected KeyToScreen<TScreenKey, TScreenConstraint>[] _sceneScreens;
 
@@ -24,13 +25,13 @@ namespace ScreensService.Containers
             }
         }
 
-        public TScreen GetOrCreateScreen<TScreen>(TScreenKey screenKey)
+        public TScreen Get<TScreen>(TScreenKey screenKey)
             where TScreen : TScreenConstraint
         {
             return GetScreen<TScreen>(screenKey);
         }
 
-        public TScreenConstraint GetOrCreateScreen(TScreenKey screenKey)
+        public TScreenConstraint Get(TScreenKey screenKey)
         {
             return GetScreenByKey(screenKey);
         }

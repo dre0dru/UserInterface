@@ -1,6 +1,6 @@
 {
-    "name": "ScreensService",
-    "rootNamespace": "ScreensService",
+    "name": "Screens.Container",
+    "rootNamespace": "Screens.Container",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

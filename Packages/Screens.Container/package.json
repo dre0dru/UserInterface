@@ -1,12 +1,14 @@
 {
-  "name": "com.dre0dru.screens.service",
+  "name": "com.dre0dru.screens.container",
   "version": "1.0.0",
-  "displayName": "ScreensService",
+  "displayName": "Screens Container",
   "description": "TODO",
-  "unity": "2020.1",
+  "unity": "2020.3",
   "unityRelease": "0f1",
   "keywords": [
-    "TODO"
+    "Unity",
+    "User Interface",
+    "UI"
   ],
   "author": {
     "name": "Dre0Dru",
