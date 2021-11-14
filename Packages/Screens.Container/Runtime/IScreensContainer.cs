@@ -6,9 +6,14 @@ namespace Screens.Container
     {
         IEnumerable<TScreenKey> Keys { get; }
 
-        TScreen Get<TScreen>(TScreenKey screenKey)
+        TScreenConstraint Instantiate(TScreenKey screenKey);
+
+        TScreen Instantiate<TScreen>(TScreenKey screenKey)
             where TScreen : TScreenConstraint;
 
-        TScreenConstraint Get(TScreenKey screenKey);
+        TScreenConstraint GetInstance(TScreenKey screenKey);
+
+        TScreen GetInstance<TScreen>(TScreenKey screenKey)
+            where TScreen : TScreenConstraint;
     }
 }
