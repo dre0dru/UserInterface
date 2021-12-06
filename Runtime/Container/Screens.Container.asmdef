@@ -1,0 +1,16 @@
+{
+    "name": "Screens.Container",
+    "rootNamespace": "Screens",
+    "references": [
+        "GUID:584b7828850956244a0dc66cb12db368"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

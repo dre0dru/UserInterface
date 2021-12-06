@@ -1,0 +1,20 @@
+{
+    "name": "Screens.Animations.Editor",
+    "rootNamespace": "Screens",
+    "references": [
+        "GUID:ad68f1c347d3bdf48a95edc127876ce4"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "DOTween.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
