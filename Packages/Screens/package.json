@@ -1,7 +1,7 @@
 {
-  "name": "com.dre0dru.screens.container",
+  "name": "com.dre0dru.screens",
   "version": "1.0.0",
-  "displayName": "Screens Container",
+  "displayName": "Screens",
   "description": "TODO",
   "unity": "2020.3",
   "unityRelease": "0f1",

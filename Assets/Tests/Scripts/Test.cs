@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Screens.Container;
+using Shared.Sources.ScriptableDatabase;
 using Tests.Scripts;
 using UnityEngine;
 using UnityEngine.UI;

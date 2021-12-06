@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Shared.Sources.ScriptableDatabase;
 using UnityEngine;
 
 namespace Screens.Container
@@ -13,10 +14,10 @@ namespace Screens.Container
         private Transform _root;
 
         [SerializeField]
-        private InstanceScreensSource<TScreenKey, TScreenConstraint>[] _instanceScreensSources;
+        private MonoDatabase<TScreenKey, TScreenConstraint>[] _instanceScreensSources;
 
         [SerializeField]
-        private PrefabScreensSource<TScreenKey, TScreenConstraint>[] _prefabScreensSources;
+        private ScriptableDatabase<TScreenKey, TScreenConstraint>[] _prefabScreensSources;
 
         private Dictionary<TScreenKey, TScreenConstraint> _screenInstances;
         private Dictionary<TScreenKey, TScreenConstraint> _screenPrefabs;
@@ -117,7 +118,7 @@ namespace Screens.Container
             return screen;
         }
 
-        private void FillScreenDictionaries(IScreensSource<TScreenKey, TScreenConstraint>[] screensSources,
+        private void FillScreenDictionaries(IScriptableDatabase<TScreenKey, TScreenConstraint>[] screensSources,
             Dictionary<TScreenKey, TScreenConstraint> collection)
         {
             foreach (var source in screensSources)
@@ -126,7 +127,7 @@ namespace Screens.Container
                 {
                     if (collection.ContainsKey(screenKey))
                     {
-                        Debug.LogWarning($"Trying to add duplicate key [{screenKey}]");
+                        Debug.LogError($"Trying to add duplicate key [{screenKey}]");
                         continue;
                     }
 

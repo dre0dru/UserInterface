@@ -873,8 +873,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1487735275}
-  - component: {fileID: 1487735274}
   - component: {fileID: 1487735276}
+  - component: {fileID: 1487735274}
   m_Layer: 0
   m_Name: ScreensRoot
   m_TagString: Untagged
@@ -927,9 +927,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a9cb28344c44c19fe572ca9941048f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screens:
-  - Key: Base
-    Screen: {fileID: 916792955}
+  _keysToValues:
+  - Key: base
+    Value: {fileID: 916792955}
+  - Key: test
+    Value: {fileID: 8647804492452302890}
 --- !u!1 &1570863399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,6 +1522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _containerMono: {fileID: 1487735274}
   _screenName: {fileID: 750265555}
+  _db: {fileID: 0}
 --- !u!114 &8647804492452302888
 MonoBehaviour:
   m_ObjectHideFlags: 0

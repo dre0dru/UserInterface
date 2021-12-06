@@ -2,7 +2,8 @@ using System.Collections.Generic;
 
 namespace Screens.Container
 {
-    //TODO separate interface for full async api with Async Source supported
+    //Screens queue
+    //Screens stack
     //Async source is either addressables or async wrapper around existing sources?
     public interface IScreensContainer<TScreenKey, TScreenConstraint>
     {

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c435a5ebc5e436581e0b6d74983b72c, type: 3}
   m_Name: ScreensSource
   m_EditorClassIdentifier: 
-  _screens:
-  - Key: ScreenV2
-    Screen: {fileID: 1969412387374089804, guid: 3aaafce9bd943454dba5fe05f623397c, type: 3}
+  _keysToValues:
+  - Key: v2
+    Value: {fileID: 1969412387374089804, guid: 3aaafce9bd943454dba5fe05f623397c, type: 3}
