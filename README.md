@@ -7,7 +7,7 @@ This package can be installed as a Unity package from git url.
 ### Latest release
 - Add following line in `Packages/manifest.json`:
 ```
-"com.dre0dru.shared.sources": "https://github.com/dre0dru/Screens.git#upm",
+"com.dre0dru.screens": "https://github.com/dre0dru/Screens.git#upm",
 ```
 - Use `Window/Package Manager/Add package from git URL...` in Unity:
 ```
