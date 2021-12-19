@@ -1,3 +1,16 @@
+# [2.0.0](https://github.com/dre0dru/Screens/compare/v1.0.0...v2.0.0) (2021-12-19)
+
+
+### Features
+
+* added shared sources preprocessor directive ([89190e8](https://github.com/dre0dru/Screens/commit/89190e88b809fb54f41df9dd63b0212368f1b368))
+* updated code to support shared sources changes ([a408989](https://github.com/dre0dru/Screens/commit/a408989fb6b6f3b2b2440724ae28c67ac54173ae))
+
+
+### BREAKING CHANGES
+
+* interfaces signature was changed
+
 # 1.0.0 (2021-12-06)
 
 
