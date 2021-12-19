@@ -7,7 +7,7 @@ namespace Screens.Container
     //Async source is either addressables or async wrapper around existing sources?
     public interface IScreensContainer<TScreenKey, TScreenConstraint>
     {
-        IEnumerable<TScreenKey> Keys { get; }
+        ICollection<TScreenKey> Keys { get; }
 
         TScreenConstraint Instantiate(TScreenKey screenKey);
 

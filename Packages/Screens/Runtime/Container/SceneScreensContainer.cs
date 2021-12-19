@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Shared.Sources.ScriptableDatabase;
+using Shared.Sources.Collections;
 using UnityEngine;
 
 namespace Screens.Container
@@ -14,23 +13,18 @@ namespace Screens.Container
         private Transform _root;
 
         [SerializeField]
-        private MonoDatabase<TScreenKey, TScreenConstraint>[] _instanceScreensSources;
+        private UDictionaryMono<TScreenKey, TScreenConstraint> _screenInstances;
 
         [SerializeField]
-        private ScriptableDatabase<TScreenKey, TScreenConstraint>[] _prefabScreensSources;
+        private UDictionarySo<TScreenKey, TScreenConstraint> _screenPrefabs;
 
-        private Dictionary<TScreenKey, TScreenConstraint> _screenInstances;
-        private Dictionary<TScreenKey, TScreenConstraint> _screenPrefabs;
+        private TScreenKey[] _screenKeys;
 
-        public IEnumerable<TScreenKey> Keys => _screenInstances.Keys.Concat(_screenPrefabs.Keys);
+        public ICollection<TScreenKey> Keys => _screenKeys;
 
         private void Awake()
         {
-            _screenInstances = new Dictionary<TScreenKey, TScreenConstraint>();
-            FillScreenDictionaries(_instanceScreensSources, _screenInstances);
-
-            _screenPrefabs = new Dictionary<TScreenKey, TScreenConstraint>();
-            FillScreenDictionaries(_prefabScreensSources, _screenPrefabs);
+            InitScreenKeys();
         }
 
         public TScreenConstraint Instantiate(TScreenKey screenKey)
@@ -118,21 +112,22 @@ namespace Screens.Container
             return screen;
         }
 
-        private void FillScreenDictionaries(IScriptableDatabase<TScreenKey, TScreenConstraint>[] screensSources,
-            Dictionary<TScreenKey, TScreenConstraint> collection)
+        private void InitScreenKeys()
         {
-            foreach (var source in screensSources)
-            {
-                foreach (var screenKey in source.Keys)
-                {
-                    if (collection.ContainsKey(screenKey))
-                    {
-                        Debug.LogError($"Trying to add duplicate key [{screenKey}]");
-                        continue;
-                    }
+            var count = _screenInstances == null ? 0 : _screenInstances.Count;
+            count += _screenPrefabs == null ? 0 : _screenPrefabs.Count;
+            _screenKeys = new TScreenKey[count];
 
-                    collection[screenKey] = source.Get(screenKey);
-                }
+            var index = 0;
+            if (_screenInstances != null)
+            {
+                _screenInstances.Keys.CopyTo(_screenKeys, 0);
+                index += _screenInstances.Count;
+            }
+
+            if (_screenPrefabs != null)
+            {
+                _screenPrefabs.Keys.CopyTo(_screenKeys, index);
             }
         }
     }
