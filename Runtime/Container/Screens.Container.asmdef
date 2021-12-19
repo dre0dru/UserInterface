@@ -2,7 +2,7 @@
     "name": "Screens.Container",
     "rootNamespace": "Screens",
     "references": [
-        "GUID:584b7828850956244a0dc66cb12db368"
+        "GUID:ed27a03d91d1b074dbc6bc2bc16ab73a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
