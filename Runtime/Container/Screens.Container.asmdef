@@ -11,6 +11,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.dre0dru.shared.sources",
+            "expression": "",
+            "define": "SHARED_SOURCES"
+        }
+    ],
     "noEngineReferences": false
 }
