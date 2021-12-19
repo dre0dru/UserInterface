@@ -1,3 +1,5 @@
+#if SHARED_SOURCES
+
 using System;
 using System.Collections.Generic;
 using Shared.Sources.Collections;
@@ -132,3 +134,4 @@ namespace Screens.Container
         }
     }
 }
+#endif
