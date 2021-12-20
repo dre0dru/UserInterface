@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace Screens.Animations.Common
 {
-    [RequireComponent(typeof(Button))]
     public class ButtonPressAnimation : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField]
