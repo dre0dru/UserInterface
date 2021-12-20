@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/dre0dru/Screens/compare/v2.1.0...v2.2.0) (2021-12-20)
+
+
+### Features
+
+* using selectable in button press animation ([41aa92d](https://github.com/dre0dru/Screens/commit/41aa92de783a4e0ea75886cb4cc0111d079a12b0))
+
 # [2.1.0](https://github.com/dre0dru/Screens/compare/v2.0.0...v2.1.0) (2021-12-20)
 
 
