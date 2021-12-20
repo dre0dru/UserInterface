@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Screens.Container;
-using Shared.Sources.ScriptableDatabase;
-using UnityEngine;
+using Shared.Sources.Collections;
 
 namespace Tests.Scripts
 {
-    public class SceneScreensSource : KvpMonoDatabase<string, ScreenBase>
+    public class SceneScreensSource : UDictionaryMono<string, ScreenBase>
     {
         
     }

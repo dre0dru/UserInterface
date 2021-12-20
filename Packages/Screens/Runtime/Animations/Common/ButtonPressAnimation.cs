@@ -16,13 +16,13 @@ namespace Screens.Animations.Common
         [SerializeField]
         private float _outDuration = 0.15f * 0.5f;
 
-        private Button _button;
+        private Selectable _selectable;
         private RectTransform _rectTransform;
 
         private void Awake()
         {
-            _button = GetComponent<Button>();
-            _rectTransform = _button.GetComponent<RectTransform>();
+            _selectable = GetComponent<Selectable>();
+            _rectTransform = _selectable.GetComponent<RectTransform>();
         }
 
         private void OnDestroy()
@@ -32,7 +32,7 @@ namespace Screens.Animations.Common
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (_button.IsInteractable())
+            if (_selectable.IsInteractable())
             {
                 _rectTransform.DOScale(_pressedScale, _inDuration)
                     .SetDefaultValues();
@@ -41,7 +41,7 @@ namespace Screens.Animations.Common
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            if (_button.IsInteractable())
+            if (_selectable.IsInteractable())
             {
                 KillTween();
                 _rectTransform.DOScale(Vector3.one, _outDuration)
