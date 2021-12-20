@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/dre0dru/Screens/compare/v2.0.0...v2.1.0) (2021-12-20)
+
+
+### Features
+
+* removed button component requirement on press animation ([534a6d3](https://github.com/dre0dru/Screens/commit/534a6d31bf6151fe73bfdfe4a9a7e27d9f1cdfaa))
+
 # [2.0.0](https://github.com/dre0dru/Screens/compare/v1.0.0...v2.0.0) (2021-12-19)
 
 
