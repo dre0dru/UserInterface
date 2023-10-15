@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DOTWEEN_ENABLED
+using System;
 using DG.Tweening;
 using Dre0Dru.Tweening;
 using UnityEngine;
@@ -29,3 +30,4 @@ namespace Dre0Dru.Screens.Animations
         }
     }
 }
+#endif
