@@ -1,0 +1,18 @@
+{
+    "name": "Dre0Dru.Screens.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1bfe606c45b738d4bb7714dc4e6d0b7e"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

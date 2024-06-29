@@ -1,7 +1,9 @@
 {
     "name": "Dre0Dru.Screens",
     "rootNamespace": "Dre0Dru.Screens",
-    "references": [],
+    "references": [
+        "GUID:858f01292afdc66489a4648c01d9ca1e"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -9,6 +11,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.dre0dru.collections",
+            "expression": "",
+            "define": "DRE0DRU_COLLECTIONS"
+        }
+    ],
     "noEngineReferences": false
 }

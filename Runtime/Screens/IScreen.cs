@@ -1,9 +1,24 @@
-﻿namespace Dre0Dru.Screens
+﻿using System;
+
+namespace Dre0Dru.Screens
 {
     public interface IScreen
     {
-        void Open();
+        event Action<ScreenState> StateChanged;
 
-        void Close();
+        ScreenState State { get; }
+
+        void Open(Action onComplete);
+        void OpenAnimated(Action onComplete);
+
+        void Close(Action onComplete);
+        void CloseAnimated(Action onComplete);
+    }
+
+    public interface IPooledScreen
+    {
+        bool IsPooled { get; }
+
+        void OnReturnToPool();
     }
 }
