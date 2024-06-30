@@ -2,6 +2,7 @@
 
 namespace Dre0Dru.Screens.UGUI
 {
+    //TODO удалить либо спец экстеншены чисто под UGUI
     public static class ScreensExtensions
     {
         public static bool IsOpenedOrOpening(this ScreenBase screen)

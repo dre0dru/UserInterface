@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Popups
 {
-    public abstract class PopupsServiceBase<TPopupBase> : MonoBehaviour, IPopupsService<TPopupBase>
-        where TPopupBase : PopupBase
+    public abstract class PopupsServiceBase<TPopupBase> : MonoBehaviour, IPopupsServicev2<TPopupBase>
+        where TPopupBase : PopupBase, IPopup<TPopupBase>
     {
         public abstract event Action<TPopupBase> OpenStarted;
         public abstract event Action<TPopupBase> OpenFinished;
@@ -14,10 +14,17 @@ namespace Dre0Dru.Screens.UGUI.Popups
         public abstract event Action<TPopupBase> CloseFinished;
 
         public abstract event Action<int> OpenedCountChanged;
+        public event Action<TPopupBase, ScreenState> StateChanged;
         public abstract int OpenedPopupsCount { get; }
 
         public abstract TPopup Instantiate<TPopup>()
             where TPopup : TPopupBase;
+
+        public bool TryGet<TPopup>(out TPopup popup)
+            where TPopup : TPopupBase
+        {
+            throw new NotImplementedException();
+        }
 
         public abstract TScreen Open<TScreen>(bool skipAnimation)
             where TScreen : TPopupBase;

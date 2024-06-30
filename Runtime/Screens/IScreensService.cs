@@ -3,6 +3,29 @@ using System.Collections.Generic;
 
 namespace Dre0Dru.Screens
 {
+    public interface IScreensServicev2<TScreenBase> : IEnumerable<TScreenBase>
+        where TScreenBase : IScreen
+    {
+        event Action<TScreenBase, ScreenState> StateChanged;
+
+        void Open(TScreenBase popupBase, bool skipAnimation = false);
+
+        void Close(TScreenBase popupBase, bool skipAnimation = false);
+    }
+
+    public interface IPopupsServicev2<TPopupBase> : IScreensServicev2<TPopupBase>
+        where TPopupBase : IPopup<TPopupBase>
+    {
+        int OpenedPopupsCount { get; }
+
+        TPopup Instantiate<TPopup>()
+            where TPopup : TPopupBase;
+
+        bool TryGet<TPopup>(out TPopup popup)
+            where TPopup : TPopupBase;
+    }
+
+
     public interface IScreensService<TScreenBase> : IEnumerable<TScreenBase>
     {
         //TODO может при создании (или при наличии в панелях) подписываться на локальные

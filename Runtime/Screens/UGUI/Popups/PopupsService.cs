@@ -17,7 +17,7 @@ namespace Dre0Dru.Screens.UGUI.Popups
     //но тут надо подумать, что делать с internal методами, которые set
     //хотелось бы, чтобы к ним доступа не было
     public class PopupsService<TPopupBase> : PopupsServiceBase<TPopupBase>
-        where TPopupBase : PopupBase
+        where TPopupBase : PopupBase, IPopup<TPopupBase>
     {
         public override event Action<TPopupBase> OpenStarted;
         public override event Action<TPopupBase> OpenFinished;
