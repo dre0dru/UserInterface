@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Sources
 {
-    public class ScreensPoolSource<TPooledScreen> : ScreensSource<TPooledScreen>
+    public class ScreensPooledSource<TPooledScreen> : ScreensSource<TPooledScreen>
         where TPooledScreen : Component, IScreen, IPooledScreen
     {
         [SerializeField]
@@ -33,6 +33,11 @@ namespace Dre0Dru.Screens.UGUI.Sources
             screen.ResetOnReturnToPool();
             screen.transform.SetParent(_poolRoot);
             _pooledPopups.Add(screen);
+        }
+
+        public override IEnumerator<TPooledScreen> GetEnumerator()
+        {
+            return ((IEnumerable<TPooledScreen>)_pooledPopups).GetEnumerator();
         }
     }
 }

@@ -2,12 +2,13 @@
 
 namespace Dre0Dru.Screens.UGUI.Popups
 {
+    //TODO попробовать сделать общую реализацию чисто на основе Iscreen и Iscreen serice
     public class PopupCloseHandle<TPopupBase> : ICloseHandle<TPopupBase>
         where TPopupBase : Component, IPopup<TPopupBase>
     {
-        private readonly IPopupsServicev2<TPopupBase> _popupsService;
+        private readonly IPopupsService<TPopupBase> _popupsService;
 
-        public PopupCloseHandle(IPopupsServicev2<TPopupBase> popupsService)
+        public PopupCloseHandle(IPopupsService<TPopupBase> popupsService)
         {
             _popupsService = popupsService;
         }

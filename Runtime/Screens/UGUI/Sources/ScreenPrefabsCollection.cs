@@ -1,19 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Sources
 {
-    public class ScreenPrefabsCollection<TScreenBase> : ScriptableObject
+    public class ScreenPrefabsCollection<TScreenBase> : ScriptableObject, IEnumerable<TScreenBase>
         where TScreenBase : Component, IScreen
     {
         [SerializeField]
         private List<TScreenBase> _prefabs;
 
-        public TPopup Get<TPopup>()
-            where TPopup : TScreenBase
+        public TScreen Get<TScreen>()
+            where TScreen : TScreenBase
         {
-            return _prefabs.Single(popup => popup.GetType() == typeof(TPopup)) as TPopup;
+            return _prefabs.Single(screen => screen.GetType() == typeof(TScreen)) as TScreen;
+        }
+
+
+        public IEnumerator<TScreenBase> GetEnumerator()
+        {
+            return ((IEnumerable<TScreenBase>)_prefabs).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

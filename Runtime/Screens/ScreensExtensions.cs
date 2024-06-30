@@ -20,7 +20,7 @@ namespace Dre0Dru.Screens
             return screen.State == ScreenState.Closing || screen.State == ScreenState.Closed;
         }
 
-        public static void CloseAll<TScreenBase>(IScreensServicev2<TScreenBase> screensService,
+        public static void CloseAll<TScreenBase>(IScreensService<TScreenBase> screensService,
             bool skipAnimation = false)
             where TScreenBase : IScreen
         {
@@ -34,7 +34,7 @@ namespace Dre0Dru.Screens
             }
         }
 
-        public static void CloseAllExcept<TScreenBase, TScreen>(IScreensServicev2<TScreenBase> screensService,
+        public static void CloseAllExcept<TScreenBase, TScreen>(IScreensService<TScreenBase> screensService,
             bool skipAnimation = false)
             where TScreenBase : IScreen
             where TScreen : TScreenBase
@@ -54,7 +54,7 @@ namespace Dre0Dru.Screens
             }
         }
 
-        public static void CloseAllExcept<TScreenBase>(IScreensServicev2<TScreenBase> screensService,
+        public static void CloseAllExcept<TScreenBase>(IScreensService<TScreenBase> screensService,
             bool skipAnimation = false, params Type[] except)
             where TScreenBase : IScreen
         {

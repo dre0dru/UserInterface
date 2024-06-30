@@ -1,123 +1,73 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Dre0Dru.Screens.UGUI.Sources;
 using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Panels
 {
-    public class PanelsService<TPanelBase> : PanelsServiceBase<TPanelBase>
-        where TPanelBase : ScreenBase
+    public class PanelsService<TPanelBase> : MonoBehaviour, IPanelsService<TPanelBase>
+        where TPanelBase : Component, IScreen
     {
-        public override event Action<TPanelBase> OpenStarted;
-        public override event Action<TPanelBase> OpenFinished;
-        public override event Action<TPanelBase> CloseStarted;
-        public override event Action<TPanelBase> CloseFinished;
+        public event Action<TPanelBase, ScreenState> StateChanged;
 
         [SerializeField]
-        private PanelsSceneSource<TPanelBase> _source;
+        private ScreensSceneSource<TPanelBase> _source;
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             ClearEventHandlers();
         }
 
-        public override TPanel Get<TPanel>()
+        public TPanel Get<TPanel>()
+            where TPanel : TPanelBase
         {
-            var panelBase = _source.Get<TPanel>();
-            panelBase.CloseAction = (skipAnimation) => { Close(panelBase, skipAnimation); };
-
-            return panelBase;
+            return _source.Get<TPanel>();
         }
 
-        public override TPanel Open<TPanel>(bool skipAnimation)
+        public void Open(TPanelBase popupBase, bool skipAnimation)
         {
-            var panelBase = Get<TPanel>();
+            if (!popupBase.IsClosedOrClosing())
+            {
+                return;
+            }
 
-            Open(panelBase, skipAnimation);
-
-            return panelBase;
-        }
-
-        public override void Open(TPanelBase popupBase, bool skipAnimation)
-        {
-            popupBase.InterruptCurrentAnimation();
-            popupBase.transform.SetAsLastSibling();
-
-            OpenStarted?.Invoke(popupBase);
+            StateChanged?.Invoke(popupBase, ScreenState.Opening);
 
             popupBase.Open(() =>
             {
-                OpenFinished?.Invoke(popupBase);
+                StateChanged?.Invoke(popupBase, ScreenState.Opened);
             }, skipAnimation);
         }
 
-        public override void Close<TPanel>(bool skipAnimation)
+        public void Close(TPanelBase popupBase, bool skipAnimation)
         {
-            var panelBase = Get<TPanel>();
-
-            Close(panelBase, skipAnimation);
-        }
-
-        public override void Close(TPanelBase popupBase, bool skipAnimation)
-        {
-            if (popupBase.IsOpenedOrOpening())
+            if (!popupBase.IsOpenedOrOpening())
             {
-                popupBase.InterruptCurrentAnimation();
-
-                CloseStarted?.Invoke(popupBase);
-
-                popupBase.Close(() =>
-                {
-                    CloseFinished?.Invoke(popupBase);
-                }, skipAnimation);
+                return;
             }
-        }
 
-        public override void CloseAll(bool skipAnimation)
-        {
-            foreach (var panelBase in _source)
+            StateChanged?.Invoke(popupBase, ScreenState.Closing);
+
+            popupBase.Close(() =>
             {
-                Close(panelBase, skipAnimation);
-            }
+                StateChanged?.Invoke(popupBase, ScreenState.Closed);
+            }, skipAnimation);
         }
 
-        public override void CloseAllExcept<TPanel>(bool skipAnimation)
-        {
-            foreach (var panelBase in _source)
-            {
-                if (panelBase.GetType() == typeof(TPanel))
-                {
-                    continue;
-                }
-
-                Close(panelBase, skipAnimation);
-            }
-        }
-
-        public override void CloseAllExcept(bool skipAnimation, params Type[] except)
-        {
-            foreach (var panelBase in _source)
-            {
-                if (except.Contains(panelBase.GetType()))
-                {
-                    continue;
-                }
-
-                Close(panelBase, skipAnimation);
-            }
-        }
-
-        public override IEnumerator<TPanelBase> GetEnumerator()
+        public IEnumerator<TPanelBase> GetEnumerator()
         {
             return ((IEnumerable<TPanelBase>)_source).GetEnumerator();
         }
 
         private void ClearEventHandlers()
         {
-            OpenStarted = null;
-            OpenFinished = null;
-            CloseStarted = null;
-            CloseFinished = null;
+            StateChanged = null;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

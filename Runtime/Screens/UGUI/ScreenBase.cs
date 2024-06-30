@@ -5,18 +5,11 @@ using UnityEngine.UI;
 
 namespace Dre0Dru.Screens.UGUI
 {
-    //TODO разбить на интерфейсы? но теряется internal тогда
-
     //Canvas per screen (https://unity.com/en/how-to/unity-ui-optimization-tips)
     [RequireComponent(typeof(Canvas))]
     [RequireComponent(typeof(GraphicRaycaster))]
-    public class ScreenBase : MonoBehaviour
+    public class ScreenBase : MonoBehaviour, IScreen
     {
-        public event Action OpenStarted;
-        public event Action OpenFinished;
-        public event Action CloseStarted;
-        public event Action CloseFinished;
-
         [Header("Settings")]
         [SerializeField]
         private Canvas _canvas;
@@ -25,34 +18,71 @@ namespace Dre0Dru.Screens.UGUI
         private ScreenAnimation _animation;
 
         [SerializeField]
-        private bool _isPooled;
-
-        [SerializeField]
         private ScreenState _state = ScreenState.Closed;
 
-        public Canvas Canvas => _canvas;
-
-        public ScreenState State => _state;
-
-        protected ScreenAnimation Animation => _animation;
-
-        internal Action<bool> CloseAction { private get; set; }
-
-        internal bool IsPooled => _isPooled;
-
-        protected void OnValidate()
+        public ScreenState State
         {
-            _canvas = GetComponent<Canvas>();
+            get => _state;
+            private set
+            {
+                _state = value;
+                StateChanged?.Invoke(_state);
+            }
         }
 
-        protected internal void InterruptCurrentAnimation()
+        public event Action<ScreenState> StateChanged;
+
+        protected virtual void OnDestroy()
         {
-            _animation.InterruptCurrentAnimation();
+            ClearEventHandlers();
         }
 
-        protected internal void Close(bool skipAnimation)
+        void IScreen.Open(Action onComplete, bool skipAnimation)
         {
-            CloseAction?.Invoke(skipAnimation);
+            State = ScreenState.Opening;
+            OnOpenStarted();
+
+            if (skipAnimation)
+            {
+                OpenFinishedLocal();
+            }
+            else
+            {
+                _animation.InterruptCurrentAnimation();
+                _animation.PlayOpenAnimation(OpenFinishedLocal);
+            }
+
+            void OpenFinishedLocal()
+            {
+                _state = ScreenState.Opened;
+                OnOpenFinished();
+
+                onComplete?.Invoke();
+            }
+        }
+
+        void IScreen.Close(Action onComplete, bool skipAnimation)
+        {
+            State = ScreenState.Closing;
+            OnCloseStarted();
+
+            if (skipAnimation)
+            {
+                CloseFinishedLocal();
+            }
+            else
+            {
+                _animation.InterruptCurrentAnimation();
+                _animation.PlayCloseAnimation(CloseFinishedLocal);
+            }
+
+            void CloseFinishedLocal()
+            {
+                State = ScreenState.Closed;
+                OnCloseFinished();
+
+                onComplete?.Invoke();
+            }
         }
 
         protected virtual void OnOpenStarted()
@@ -71,65 +101,9 @@ namespace Dre0Dru.Screens.UGUI
         {
         }
 
-        protected internal virtual void OnReset()
+        protected void ClearEventHandlers()
         {
-        }
-
-        internal void Open(Action onComplete, bool skipAnimation)
-        {
-            _state = ScreenState.Opening;
-            OnOpenStarted();
-            OpenStarted?.Invoke();
-
-            if (skipAnimation)
-            {
-                OpenFinishedLocal();
-            }
-            else
-            {
-                _animation.PlayOpenAnimation(OpenFinishedLocal);
-            }
-
-            void OpenFinishedLocal()
-            {
-                _state = ScreenState.Opened;
-                OnOpenFinished();
-                OpenFinished?.Invoke();
-                onComplete?.Invoke();
-            }
-        }
-
-        internal void Close(Action onComplete, bool skipAnimation)
-        {
-            _state = ScreenState.Closing;
-            OnCloseStarted();
-            CloseStarted?.Invoke();
-
-            if (skipAnimation)
-            {
-                CloseFinishedLocal();
-            }
-            else
-            {
-                _animation.PlayCloseAnimation(CloseFinishedLocal);
-            }
-
-            void CloseFinishedLocal()
-            {
-                _state = ScreenState.Closed;
-                OnCloseFinished();
-                CloseFinished?.Invoke();
-
-                onComplete?.Invoke();
-            }
-        }
-
-        protected internal void ClearEventHandlers()
-        {
-            OpenStarted = null;
-            OpenFinished = null;
-            CloseStarted = null;
-            CloseFinished = null;
+            StateChanged = null;
         }
     }
 }

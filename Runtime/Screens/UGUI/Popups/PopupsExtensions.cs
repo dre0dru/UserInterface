@@ -2,12 +2,34 @@
 {
     public static class PopupsExtensions
     {
-        public static TPopup Open<TPopupBase, TPopup>(this IPopupsServicev2<TPopupBase> popupsService, bool skipAnimation = false)
+        public static TPopup Open<TPopupBase, TPopup>(this IPopupsService<TPopupBase> popupsService, bool skipAnimation = false)
             where TPopupBase : IPopup<TPopupBase>
             where TPopup : TPopupBase
         {
-            var popup = popupsService.Instantiate<TPopup>();
-            popupsService.Open(popup, skipAnimation);
+            if (!popupsService.TryGet(out TPopup popup))
+            {
+                popupsService.Instantiate<TPopup>();
+                popupsService.Open(popup, skipAnimation);
+            }
+
+            return popup;
+        }
+
+        public static void Close<TPopupBase, TPopup>(this IPopupsService<TPopupBase> popupsService, bool skipAnimation = false)
+            where TPopupBase : IPopup<TPopupBase>
+            where TPopup : TPopupBase
+        {
+            if (popupsService.TryGet(out TPopup popup))
+            {
+                popupsService.Close(popup, skipAnimation);
+            }
+        }
+
+        public static TPopup Get<TPopupBase, TPopup>(this IPopupsService<TPopupBase> popupsService)
+            where TPopupBase : IPopup<TPopupBase>
+            where TPopup : TPopupBase
+        {
+            popupsService.TryGet(out TPopup popup);
             return popup;
         }
     }
