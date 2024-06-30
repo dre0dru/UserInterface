@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Dre0Dru.UI.Screens.UGUI.Sources
 {
-    public class ScreensPooledSource<TPooledScreen, TScreensSource> : ScreensSource<TPooledScreen>
+    public class ScreensPooledSource<TPooledScreen, TScreensSource> : ScreensSource<TPooledScreen>,
+        IPooledSource<TPooledScreen>
         where TPooledScreen : Component, IScreen, IPooledScreen
         where TScreensSource : IScreenPrefabsSource<TPooledScreen>
     {
@@ -29,7 +30,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Sources
             return screen;
         }
 
-        public void Return(TPooledScreen screen)
+        public void ReturnToPool(TPooledScreen screen)
         {
             screen.ResetOnReturnToPool();
             screen.transform.SetParent(_poolRoot);
