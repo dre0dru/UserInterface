@@ -1,29 +1,28 @@
 ﻿namespace Dre0Dru.UI.Screens.UGUI.Panels
 {
-    public class PanelBase : ScreenBase, ISelfOpenableScreen<PanelBase>, ISelfCloseableScreen<PanelBase>
+    public class PanelBase : ScreenBase, ISelfOpenableScreen, ISelfCloseableScreen
     {
-        private IOpenHandle<PanelBase> OpenHandle { get; set; }
-        private ICloseHandle<PanelBase> CloseHandle { get; set; }
+        private IOpenHandle OpenHandle { get; set; }
+        private ICloseHandle CloseHandle { get; set; }
 
-
-        IOpenHandle<PanelBase> ISelfOpenableScreen<PanelBase>.OpenHandle
+        IOpenHandle ISelfOpenableScreen.OpenHandle
         {
             set => OpenHandle = value;
         }
 
-        ICloseHandle<PanelBase> ISelfCloseableScreen<PanelBase>.CloseHandle
+        ICloseHandle ISelfCloseableScreen.CloseHandle
         {
             set => CloseHandle = value;
         }
 
         public void Open(bool skipAnimation = false)
         {
-            OpenHandle.Open(this, skipAnimation);
+            OpenHandle.Open(skipAnimation);
         }
 
         public void Close(bool skipAnimation = false)
         {
-            CloseHandle.Close(this, skipAnimation);
+            CloseHandle.Close(skipAnimation);
         }
     }
 }

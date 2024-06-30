@@ -1,7 +1,7 @@
 ﻿namespace Dre0Dru.UI.Screens
 {
-    public interface ICloseHandle<in TScreenBase>
+    public interface ICloseHandle
     {
-        void Close(TScreenBase screen, bool skipAnimation = false);
+        void Close(bool skipAnimation = false);
     }
 }

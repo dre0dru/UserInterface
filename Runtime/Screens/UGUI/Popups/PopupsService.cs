@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace Dre0Dru.UI.Screens.UGUI.Popups
 {
+    //TODO do not make openable/closeable by default, make separate implementation
+    //TODO also do not make pooled by default
     public class PopupsService<TPopupBase, TPopupsSource> : MonoBehaviour, IPopupsService<TPopupBase>
-        where TPopupBase : Component, IScreen, IPooledScreen, ISelfCloseableScreen<TPopupBase>
+        where TPopupBase : Component, IScreen, IPooledScreen, ISelfCloseableScreen
         where TPopupsSource : IPooledSource<TPopupBase>
     {
         public event Action<TPopupBase, ScreenState> StateChanged;
@@ -18,31 +20,29 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
         private RectTransform _root;
 
         private readonly Dictionary<Type, TPopupBase> _openedPopups = new();
-        private ScreenOpenCloseHandle<TPopupBase> _closeHandle;
 
         public int OpenedPopupsCount => _openedPopups.Count;
 
-        protected virtual void Awake()
-        {
-            _closeHandle = new ScreenOpenCloseHandle<TPopupBase>(this);
-        }
+        protected TPopupsSource Source => _source;
+
+        protected RectTransform Root => _root;
 
         protected virtual void OnDestroy()
         {
             ClearEventHandlers();
         }
 
-        public TPopup Instantiate<TPopup>()
+        public virtual TPopup Create<TPopup>()
             where TPopup : TPopupBase
         {
             var popup = _source.Get<TPopup>();
 
-            popup.CloseHandle = _closeHandle;
+            popup.CloseHandle = new ScreenOpenCloseHandle<TPopupBase>(this);
 
             return popup;
         }
 
-        public bool TryGet<TPopup>(out TPopup popup)
+        public virtual bool TryGet<TPopup>(out TPopup popup)
             where TPopup : TPopupBase
         {
             if (_openedPopups.TryGetValue(typeof(TPopup), out var popupBase))
@@ -55,20 +55,18 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
             return false;
         }
 
-        public void Open(TPopupBase popupBase, bool skipAnimation)
+        public virtual void Open(TPopupBase popupBase, bool skipAnimation)
         {
-            if (!popupBase.IsClosedOrClosing())
-            {
-                return;
-            }
-
             var type = popupBase.GetType();
 
             var popupTransform = popupBase.transform;
             popupTransform.SetParent(_root);
             popupTransform.SetAsLastSibling();
 
-            _openedPopups.Add(type, popupBase);
+            if (!_openedPopups.TryAdd(type, popupBase))
+            {
+                return;
+            }
 
             StateChanged?.Invoke(popupBase, ScreenState.Opening);
 
@@ -78,28 +76,30 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
             }, skipAnimation);
         }
 
-        public void Close(TPopupBase popupBase, bool skipAnimation)
+        public virtual void Close(TPopupBase popupBase, bool skipAnimation)
         {
-            if (popupBase.IsOpenedOrOpening())
+            var type = popupBase.GetType();
+
+            if (!_openedPopups.Remove(type))
             {
-                _openedPopups.Remove(popupBase.GetType());
-
-                StateChanged?.Invoke(popupBase, ScreenState.Closing);
-
-                popupBase.Close(() =>
-                {
-                    StateChanged?.Invoke(popupBase, ScreenState.Closed);
-
-                    if (popupBase.IsPooled)
-                    {
-                        _source.ReturnToPool(popupBase);
-                    }
-                    else
-                    {
-                        Destroy(popupBase.gameObject);
-                    }
-                }, skipAnimation);
+                return;
             }
+
+            StateChanged?.Invoke(popupBase, ScreenState.Closing);
+
+            popupBase.Close(() =>
+            {
+                StateChanged?.Invoke(popupBase, ScreenState.Closed);
+
+                if (popupBase.IsPooled)
+                {
+                    _source.ReturnToPool(popupBase);
+                }
+                else
+                {
+                    Destroy(popupBase.gameObject);
+                }
+            }, skipAnimation);
         }
 
         public IEnumerator<TPopupBase> GetEnumerator()
@@ -107,7 +107,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
             return ((IEnumerable<TPopupBase>)_openedPopups.Values).GetEnumerator();
         }
 
-        private void ClearEventHandlers()
+        protected void ClearEventHandlers()
         {
             StateChanged = null;
         }

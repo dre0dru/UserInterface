@@ -25,7 +25,7 @@ namespace Dre0Dru.UI.Screens
     {
         int OpenedPopupsCount { get; }
 
-        TPopup Instantiate<TPopup>()
+        TPopup Create<TPopup>()
             where TPopup : TPopupBase;
 
         bool TryGet<TPopup>(out TPopup popup)

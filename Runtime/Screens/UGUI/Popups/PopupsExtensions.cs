@@ -9,7 +9,7 @@
         {
             if (!popupsService.TryGet(out TPopup popup))
             {
-                popup = popupsService.Instantiate<TPopup>();
+                popup = popupsService.Create<TPopup>();
                 popupsService.Open(popup, skipAnimation);
             }
 
@@ -43,7 +43,7 @@
         {
             if (!popupsService.TryGet(out TPopup popup))
             {
-                popup = popupsService.Instantiate<TPopup>();
+                popup = popupsService.Create<TPopup>();
                 popup.SetPresenter(presenter);
                 popupsService.Open(popup, skipAnimation);
             }

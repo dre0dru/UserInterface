@@ -20,16 +20,16 @@ namespace Dre0Dru.UI.Screens
         void ResetOnReturnToPool();
     }
 
-    public interface ISelfCloseableScreen<out TScreenBase>
+    public interface ISelfCloseableScreen
     {
-        ICloseHandle<TScreenBase> CloseHandle { set; }
+        ICloseHandle CloseHandle { set; }
 
         void Close(bool skipAnimation = false);
     }
 
-    public interface ISelfOpenableScreen<out TScreenBase>
+    public interface ISelfOpenableScreen
     {
-        IOpenHandle<TScreenBase> OpenHandle { set; }
+        IOpenHandle OpenHandle { set; }
 
         void Open(bool skipAnimation = false);
     }

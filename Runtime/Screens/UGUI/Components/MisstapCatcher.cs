@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace Dre0Dru.UI.Screens.UGUI.Components
 {
     public class MisstapCatcher<TScreenBase> : Button
-        where TScreenBase : ISelfCloseableScreen<TScreenBase>
+        where TScreenBase : ISelfCloseableScreen
     {
         [SerializeField]
         private TScreenBase _screen;

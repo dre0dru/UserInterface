@@ -1,7 +1,7 @@
 ﻿namespace Dre0Dru.UI.Screens
 {
-    public interface IOpenHandle<in TScreenBase>
+    public interface IOpenHandle
     {
-        void Open(TScreenBase screen, bool skipAnimation = false);
+        void Open(bool skipAnimation = false);
     }
 }

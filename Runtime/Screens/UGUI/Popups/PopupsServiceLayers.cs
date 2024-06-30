@@ -24,10 +24,10 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
             remove => DefaultLayer.StateChanged -= value;
         }
 
-        public TPopup Instantiate<TPopup>()
+        public TPopup Create<TPopup>()
             where TPopup : TScreenBase
         {
-            return DefaultLayer.Instantiate<TPopup>();
+            return DefaultLayer.Create<TPopup>();
         }
 
         public bool TryGet<TPopup>(out TPopup popup)
