@@ -1,13 +1,9 @@
 ﻿using System;
 using Dre0Dru.UI.Screens.UGUI.Animations;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Dre0Dru.UI.Screens.UGUI
 {
-    //Canvas per screen (https://unity.com/en/how-to/unity-ui-optimization-tips)
-    [RequireComponent(typeof(Canvas))]
-    [RequireComponent(typeof(GraphicRaycaster))]
     public class ScreenBase : MonoBehaviour, IScreen
     {
         [SerializeField]
