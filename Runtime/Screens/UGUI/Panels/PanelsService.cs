@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Dre0Dru.Screens.UGUI.Sources;
 using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Panels
 {
-    public class PanelsService<TPanelBase> : MonoBehaviour, IPanelsService<TPanelBase>
+    //TODO IPanel : SelfCloseable/Openable
+    public class PanelsService<TPanelBase, TPanelsSource> : MonoBehaviour, IPanelsService<TPanelBase>
         where TPanelBase : Component, IScreen
+        where TPanelsSource : IScreensSource<TPanelBase>
     {
         public event Action<TPanelBase, ScreenState> StateChanged;
 
         [SerializeField]
-        private ScreensSceneSource<TPanelBase> _source;
+        private TPanelsSource _source;
 
         protected virtual void OnDestroy()
         {
@@ -57,7 +58,7 @@ namespace Dre0Dru.Screens.UGUI.Panels
 
         public IEnumerator<TPanelBase> GetEnumerator()
         {
-            return ((IEnumerable<TPanelBase>)_source).GetEnumerator();
+            return _source.GetEnumerator();
         }
 
         private void ClearEventHandlers()

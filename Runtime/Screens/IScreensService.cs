@@ -21,7 +21,7 @@ namespace Dre0Dru.Screens
     }
 
     public interface IPopupsService<TPopupBase> : IScreensService<TPopupBase>
-        where TPopupBase : IPopup<TPopupBase>
+        where TPopupBase : IScreen
     {
         int OpenedPopupsCount { get; }
 

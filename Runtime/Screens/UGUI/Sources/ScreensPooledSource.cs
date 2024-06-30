@@ -4,14 +4,15 @@ using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Sources
 {
-    public class ScreensPooledSource<TPooledScreen> : ScreensSource<TPooledScreen>
+    public class ScreensPooledSource<TPooledScreen, TScreensSource> : ScreensSource<TPooledScreen>
         where TPooledScreen : Component, IScreen, IPooledScreen
+        where TScreensSource : IScreenPrefabsSource<TPooledScreen>
     {
         [SerializeField]
         private RectTransform _poolRoot;
 
         [SerializeField]
-        private ScreensSource<TPooledScreen> _screensSource;
+        private TScreensSource _prefabsSource;
 
         private readonly List<TPooledScreen> _pooledPopups = new();
 
@@ -21,7 +22,7 @@ namespace Dre0Dru.Screens.UGUI.Sources
 
             if (screen == null)
             {
-                var prefab = _screensSource.Get<TScreen>();
+                var prefab = _prefabsSource.GetPrefab<TScreen>();
                 screen = Instantiate(prefab, _poolRoot);
             }
 

@@ -28,8 +28,10 @@ namespace Dre0Dru.Screens
         void Close(bool skipAnimation = false);
     }
 
-    public interface IPopup<out TPopupBase> : IScreen, IPooledScreen, ISelfCloseableScreen<TPopupBase>
-        where TPopupBase : IPopup<TPopupBase>
+    public interface ISelfOpenableScreen<out TScreenBase>
     {
+        IOpenHandle<TScreenBase> OpenHandle { set; }
+
+        void Open(bool skipAnimation = false);
     }
 }

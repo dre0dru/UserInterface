@@ -2,6 +2,11 @@
 
 namespace Dre0Dru.Screens
 {
+    //TODO сделать бы как-то имплементацию так, чтобы просто подменой источника
+    //менялось поведение
+    //тип пул или нет, со сцены или из префаба
+
+    //TODO а пока как минимум сделать реализации на генерик суорсе с констрейнтом
     public interface IScreensSource<TScreenBase> : IEnumerable<TScreenBase>
         where TScreenBase : IScreen
     {
@@ -9,7 +14,7 @@ namespace Dre0Dru.Screens
             where TScreen : TScreenBase;
     }
 
-    public interface IPrefabsSource<TPrefab> : IEnumerable<TPrefab>
+    public interface IScreenPrefabsSource<TPrefab> : IEnumerable<TPrefab>
         where TPrefab : IScreen
     {
         TScreen GetPrefab<TScreen>()

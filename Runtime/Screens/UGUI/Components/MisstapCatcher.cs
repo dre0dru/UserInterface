@@ -3,10 +3,11 @@ using UnityEngine.UI;
 
 namespace Dre0Dru.Screens.UGUI.Components
 {
-    public class MisstapCatcher : Button
+    public class MisstapCatcher<TScreenBase> : Button
+        where TScreenBase : ISelfCloseableScreen<TScreenBase>
     {
         [SerializeField]
-        private ScreenBase _screen;
+        private TScreenBase _screen;
 
         [SerializeField]
         private bool _skipAnimation;
@@ -25,10 +26,7 @@ namespace Dre0Dru.Screens.UGUI.Components
 
         private void Close()
         {
-            if (_screen is ISelfCloseableScreen<ScreenBase> screen)
-            {
-                screen.Close(_skipAnimation);
-            }
+            _screen.Close(_skipAnimation);
         }
     }
 }

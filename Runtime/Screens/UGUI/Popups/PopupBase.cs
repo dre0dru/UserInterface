@@ -2,7 +2,7 @@
 
 namespace Dre0Dru.Screens.UGUI.Popups
 {
-    public class PopupBase : ScreenBase, IPopup<PopupBase>
+    public class PopupBase : ScreenBase, IPooledScreen, ISelfCloseableScreen<PopupBase>
     {
         [SerializeField]
         private bool _isPooled;

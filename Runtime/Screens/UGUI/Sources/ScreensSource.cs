@@ -4,11 +4,7 @@ using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Sources
 {
-    //TODO попробовать тоже через интерфейс?
-    //то есть в самом сервисе указывать что за source как генерик
-    //с констрейнтом по интерфейсу
-    //TODO плюс доп интерфейсы констрейнты типо IPooledScreenSource
-    public abstract class ScreensSource<TScreenBase> : MonoBehaviour, IEnumerable<TScreenBase>
+    public abstract class ScreensSource<TScreenBase> : MonoBehaviour, IScreensSource<TScreenBase>
         where TScreenBase : IScreen
     {
         public abstract TScreen Get<TScreen>()

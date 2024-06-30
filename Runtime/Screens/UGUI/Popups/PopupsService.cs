@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Dre0Dru.Screens.UGUI.Sources;
 using UnityEngine;
 
 namespace Dre0Dru.Screens.UGUI.Popups
 {
-    public class PopupsService<TPopupBase> : MonoBehaviour, IPopupsService<TPopupBase>
-        where TPopupBase : Component, IPopup<TPopupBase>
+    public class PopupsService<TPopupBase, TPopupsSource> : MonoBehaviour, IPopupsService<TPopupBase>
+        where TPopupBase : Component, IScreen, IPooledScreen, ISelfCloseableScreen<TPopupBase>
+        where TPopupsSource : IPooledSource<TPopupBase>
     {
         public event Action<TPopupBase, ScreenState> StateChanged;
 
         [SerializeField]
-        private ScreensPooledSource<TPopupBase> _source;
+        private TPopupsSource _source;
 
         [SerializeField]
         private RectTransform _root;
 
         private readonly Dictionary<Type, TPopupBase> _openedPopups = new();
-        private PopupCloseHandle<TPopupBase> _closeHandle;
+        private ScreenOpenCloseHandle<TPopupBase> _closeHandle;
 
         public int OpenedPopupsCount => _openedPopups.Count;
 
         protected virtual void Awake()
         {
-            _closeHandle = new PopupCloseHandle<TPopupBase>(this);
+            _closeHandle = new ScreenOpenCloseHandle<TPopupBase>(this);
         }
 
         protected virtual void OnDestroy()
@@ -90,7 +90,7 @@ namespace Dre0Dru.Screens.UGUI.Popups
 
                     if (popupBase.IsPooled)
                     {
-                        _source.Return(popupBase);
+                        _source.ReturnToPool(popupBase);
                     }
                     else
                     {

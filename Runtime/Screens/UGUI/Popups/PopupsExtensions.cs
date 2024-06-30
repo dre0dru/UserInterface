@@ -3,7 +3,7 @@
     public static class PopupsExtensions
     {
         public static TPopup Open<TPopupBase, TPopup>(this IPopupsService<TPopupBase> popupsService, bool skipAnimation = false)
-            where TPopupBase : IPopup<TPopupBase>
+            where TPopupBase : IScreen
             where TPopup : TPopupBase
         {
             if (!popupsService.TryGet(out TPopup popup))
@@ -16,7 +16,7 @@
         }
 
         public static void Close<TPopupBase, TPopup>(this IPopupsService<TPopupBase> popupsService, bool skipAnimation = false)
-            where TPopupBase : IPopup<TPopupBase>
+            where TPopupBase : IScreen
             where TPopup : TPopupBase
         {
             if (popupsService.TryGet(out TPopup popup))
@@ -26,7 +26,7 @@
         }
 
         public static TPopup Get<TPopupBase, TPopup>(this IPopupsService<TPopupBase> popupsService)
-            where TPopupBase : IPopup<TPopupBase>
+            where TPopupBase : IScreen
             where TPopup : TPopupBase
         {
             popupsService.TryGet(out TPopup popup);
