@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Dre0Dru.UI.Screens.UGUI.Panels
 {
     public class PanelsService<TPanelBase, TPanelsSource> : MonoBehaviour, IPanelsService<TPanelBase>
-        where TPanelBase : Component, IScreen, ISelfOpenableScreen<TPanelBase>, ISelfCloseableScreen<TPanelBase>
+        where TPanelBase : IScreen, ISelfOpenableScreen<TPanelBase>, ISelfCloseableScreen<TPanelBase>
         where TPanelsSource : IScreensSource<TPanelBase>
     {
         public event Action<TPanelBase, ScreenState> StateChanged;

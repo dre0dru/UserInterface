@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Dre0Dru.UI.Screens.UGUI.Popups
 {
+    //TODO locking unlocking layers via disabling graphic raycaster
     public class PopupsServiceLayers<TScreenService, TKey, TScreenBase> : ScreensServiceLayers<TScreenService, TKey, TScreenBase>, IPopupsService<TScreenBase>
         where TScreenService : IPopupsService<TScreenBase>
         where TScreenBase : IScreen

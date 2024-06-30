@@ -10,10 +10,6 @@ namespace Dre0Dru.UI.Screens.UGUI
     [RequireComponent(typeof(GraphicRaycaster))]
     public class ScreenBase : MonoBehaviour, IScreen
     {
-        [Header("Settings")]
-        [SerializeField]
-        private Canvas _canvas;
-
         [SerializeField]
         private ScreenAnimation _animation;
 

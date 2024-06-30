@@ -1,24 +1,20 @@
-﻿namespace Dre0Dru.UI.Screens
+﻿using System;
+
+namespace Dre0Dru.UI.Screens
 {
-    //TODO подумать, как это органично вписать
-    //TODO возможно экстеншены через открытый API и экстеншены + chaining
+    //TODO builder pattern or method chaining for setting
+    //multiple different presenters to one screen
 
-    //TODO можно биндить либо к GO, либо к какому-то методу попапа
-    //сделать это из коробки
-
-    //TODO сделать удобный api для сета нескольких презентеров
-    //чтобы не было так, что корневой долен создавать несколько разных
-    //как вариант - имплементация/декоратор сервиса, в который зашит IocFactory
-    //и который собственно может создавать презентеры
-    //и builder паттерн для всего этого
-    public interface IPresenter
+    //TODO AddTo() methods for disposing like in UniRX
+    //both for disposable bag and gameObject destroy trigger
+    public interface IPresenter : IDisposable
     {
         
     }
 
-    public interface IPresentable<T>
-        where T : IPresenter
+    public interface IPresentable<in TPresenter>
+        where TPresenter : IPresenter
     {
-
+        void SetPresenter(TPresenter presenter);
     }
 }
