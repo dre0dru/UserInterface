@@ -35,7 +35,11 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
         public TPopup Instantiate<TPopup>()
             where TPopup : TPopupBase
         {
-            return _source.Get<TPopup>();
+            var popup = _source.Get<TPopup>();
+
+            popup.CloseHandle = _closeHandle;
+
+            return popup;
         }
 
         public bool TryGet<TPopup>(out TPopup popup)
@@ -53,8 +57,6 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
 
         public void Open(TPopupBase popupBase, bool skipAnimation)
         {
-            popupBase.CloseHandle = _closeHandle;
-
             if (!popupBase.IsClosedOrClosing())
             {
                 return;

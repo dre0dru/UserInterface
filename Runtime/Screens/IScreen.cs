@@ -2,7 +2,6 @@
 
 namespace Dre0Dru.UI.Screens
 {
-    //TODO сделать asmdef и неймспейс как Dre0Dru.UI.Screens
     public interface IScreen
     {
         event Action<ScreenState> StateChanged;

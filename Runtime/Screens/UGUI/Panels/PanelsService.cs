@@ -5,15 +5,21 @@ using UnityEngine;
 
 namespace Dre0Dru.UI.Screens.UGUI.Panels
 {
-    //TODO IPanel : SelfCloseable/Openable
     public class PanelsService<TPanelBase, TPanelsSource> : MonoBehaviour, IPanelsService<TPanelBase>
-        where TPanelBase : Component, IScreen
+        where TPanelBase : Component, IScreen, ISelfOpenableScreen<TPanelBase>, ISelfCloseableScreen<TPanelBase>
         where TPanelsSource : IScreensSource<TPanelBase>
     {
         public event Action<TPanelBase, ScreenState> StateChanged;
 
         [SerializeField]
         private TPanelsSource _source;
+
+        private ScreenOpenCloseHandle<TPanelBase> _openCloseHandle;
+
+        protected virtual void Awake()
+        {
+            _openCloseHandle = new ScreenOpenCloseHandle<TPanelBase>(this);
+        }
 
         protected virtual void OnDestroy()
         {
@@ -23,7 +29,12 @@ namespace Dre0Dru.UI.Screens.UGUI.Panels
         public TPanel Get<TPanel>()
             where TPanel : TPanelBase
         {
-            return _source.Get<TPanel>();
+            var panel = _source.Get<TPanel>();
+
+            panel.OpenHandle = _openCloseHandle;
+            panel.CloseHandle = _openCloseHandle;
+
+            return panel;
         }
 
         public void Open(TPanelBase popupBase, bool skipAnimation)
