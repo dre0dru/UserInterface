@@ -3,7 +3,7 @@
 using Dre0Dru.Collections;
 using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Layers
+namespace Dre0Dru.UI.Screens.UGUI
 {
     public class ScreensServiceLayers<TScreenService, TKey, TScreenBase> : MonoBehaviour, IScreensServiceLayers<TScreenService, TKey, TScreenBase>
         where TScreenService : IScreensService<TScreenBase>

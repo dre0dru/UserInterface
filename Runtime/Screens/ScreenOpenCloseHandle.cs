@@ -1,4 +1,4 @@
-﻿namespace Dre0Dru.Screens.UGUI.Popups
+﻿namespace Dre0Dru.UI.Screens
 {
     public class ScreenOpenCloseHandle<TScreenBase> : ICloseHandle<TScreenBase>, IOpenHandle<TScreenBase>
         where TScreenBase : IScreen

@@ -1,4 +1,4 @@
-﻿namespace Dre0Dru.Screens
+﻿namespace Dre0Dru.UI.Screens
 {
     public interface IOpenHandle<in TScreenBase>
     {

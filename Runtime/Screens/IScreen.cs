@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dre0Dru.Screens
+namespace Dre0Dru.UI.Screens
 {
     //TODO сделать asmdef и неймспейс как Dre0Dru.UI.Screens
     public interface IScreen

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Sources
+namespace Dre0Dru.UI.Screens.UGUI.Sources
 {
     public class ScreensPooledSource<TPooledScreen, TScreensSource> : ScreensSource<TPooledScreen>
         where TPooledScreen : Component, IScreen, IPooledScreen

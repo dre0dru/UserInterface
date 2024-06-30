@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Pool;
 
-namespace Dre0Dru.Screens
+namespace Dre0Dru.UI.Screens
 {
     public static class ScreensExtensions
     {

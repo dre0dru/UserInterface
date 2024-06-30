@@ -1,10 +1,10 @@
-﻿using Dre0Dru.Screens.UGUI.Components;
+﻿using Dre0Dru.UI.Screens.UGUI.Components;
 using UnityEditor;
 using UnityEditor.UI;
 
-namespace Dre0Dru.Screens.Editor.Components
+namespace Dre0Dru.UI.Screens.Editor.Components
 {
-    [CanEditMultipleObjects, CustomEditor(typeof(MisstapCatcher), false)]
+    [CanEditMultipleObjects, CustomEditor(typeof(MisstapCatcher<>), false)]
     public class MisstapCatcherEditor : ButtonEditor
     {
         private SerializedProperty _screenProperty;

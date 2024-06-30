@@ -1,4 +1,4 @@
-﻿namespace Dre0Dru.Screens
+﻿namespace Dre0Dru.UI.Screens
 {
     public interface IScreensServiceLayers<out TScreenService, in TKey, TScreenBase>
         where TScreenService : IScreensService<TScreenBase>

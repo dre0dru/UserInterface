@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Sources
+namespace Dre0Dru.UI.Screens.UGUI.Sources
 {
     public class ScreenPrefabsCollection<TScreenBase> : ScriptableObject, IScreenPrefabsSource<TScreenBase>
         where TScreenBase : Component, IScreen

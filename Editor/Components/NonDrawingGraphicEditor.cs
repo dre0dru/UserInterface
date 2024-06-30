@@ -1,9 +1,10 @@
-﻿using Dre0Dru.Screens.UGUI.Components;
-using UnityEngine;
+﻿using System;
+using Dre0Dru.Screens.UGUI.Components;
 using UnityEditor;
 using UnityEditor.UI;
+using UnityEngine;
 
-namespace Dre0Dru.Screens.Editor.Components
+namespace Dre0Dru.UI.Components.Editor
 {
     [CanEditMultipleObjects, CustomEditor(typeof(NonDrawingGraphic), false)]
     public class NonDrawingGraphicEditor : GraphicEditor
@@ -11,7 +12,7 @@ namespace Dre0Dru.Screens.Editor.Components
         public override void OnInspectorGUI ()
         {
             serializedObject.Update();
-            EditorGUILayout.PropertyField(m_Script, new GUILayoutOption[0]);
+            EditorGUILayout.PropertyField(m_Script, Array.Empty<GUILayoutOption>());
             // skipping AppearanceControlsGUI
             RaycastControlsGUI();
             serializedObject.ApplyModifiedProperties();

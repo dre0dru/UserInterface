@@ -1,4 +1,4 @@
-﻿namespace Dre0Dru.Screens.UGUI.Popups
+﻿namespace Dre0Dru.UI.Screens.UGUI.Popups
 {
     public static class PopupsExtensions
     {

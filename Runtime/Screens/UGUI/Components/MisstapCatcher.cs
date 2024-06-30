@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dre0Dru.Screens.UGUI.Components
+namespace Dre0Dru.UI.Screens.UGUI.Components
 {
     public class MisstapCatcher<TScreenBase> : Button
         where TScreenBase : ISelfCloseableScreen<TScreenBase>

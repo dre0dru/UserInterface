@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Popups
+namespace Dre0Dru.UI.Screens.UGUI.Popups
 {
     public class PopupBase : ScreenBase, IPooledScreen, ISelfCloseableScreen<PopupBase>
     {

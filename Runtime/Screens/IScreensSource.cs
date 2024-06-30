@@ -1,12 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace Dre0Dru.Screens
+namespace Dre0Dru.UI.Screens
 {
-    //TODO сделать бы как-то имплементацию так, чтобы просто подменой источника
-    //менялось поведение
-    //тип пул или нет, со сцены или из префаба
-
-    //TODO а пока как минимум сделать реализации на генерик суорсе с констрейнтом
     public interface IScreensSource<TScreenBase> : IEnumerable<TScreenBase>
         where TScreenBase : IScreen
     {

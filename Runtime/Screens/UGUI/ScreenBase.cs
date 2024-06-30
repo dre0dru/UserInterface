@@ -1,9 +1,9 @@
 ﻿using System;
-using Dre0Dru.Screens.UGUI.Animations;
+using Dre0Dru.UI.Screens.UGUI.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Dre0Dru.Screens.UGUI
+namespace Dre0Dru.UI.Screens.UGUI
 {
     //Canvas per screen (https://unity.com/en/how-to/unity-ui-optimization-tips)
     [RequireComponent(typeof(Canvas))]

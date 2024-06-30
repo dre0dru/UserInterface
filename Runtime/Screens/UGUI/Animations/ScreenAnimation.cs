@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Animations
+namespace Dre0Dru.UI.Screens.UGUI.Animations
 {
     public abstract class ScreenAnimation : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-﻿namespace Dre0Dru.Screens
+﻿namespace Dre0Dru.UI.Screens
 {
     //TODO подумать, как это органично вписать
     //TODO возможно экстеншены через открытый API и экстеншены + chaining

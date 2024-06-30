@@ -1,0 +1,18 @@
+{
+    "name": "Dre0Dru.UI.Components.Editor",
+    "rootNamespace": "Dre0Dru.UI.Components.Editor",
+    "references": [
+        "GUID:262d417db9b8cd94898dfb116be7eae5"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

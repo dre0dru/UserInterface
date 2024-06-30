@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Panels
+namespace Dre0Dru.UI.Screens.UGUI.Panels
 {
     //TODO IPanel : SelfCloseable/Openable
     public class PanelsService<TPanelBase, TPanelsSource> : MonoBehaviour, IPanelsService<TPanelBase>

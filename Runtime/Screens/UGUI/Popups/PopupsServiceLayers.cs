@@ -3,10 +3,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Dre0Dru.Screens.UGUI.Layers;
 using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Popups
+namespace Dre0Dru.UI.Screens.UGUI.Popups
 {
     public class PopupsServiceLayers<TScreenService, TKey, TScreenBase> : ScreensServiceLayers<TScreenService, TKey, TScreenBase>, IPopupsService<TScreenBase>
         where TScreenService : IPopupsService<TScreenBase>

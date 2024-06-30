@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Dre0Dru.Screens
+namespace Dre0Dru.UI.Screens
 {
     public interface IScreensService<TScreenBase> : IEnumerable<TScreenBase>
         where TScreenBase : IScreen

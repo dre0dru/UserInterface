@@ -1,7 +1,8 @@
 {
-    "name": "Dre0Dru.Screens",
-    "rootNamespace": "Dre0Dru.Screens",
+    "name": "Dre0Dru.UI.Screens.UGUI",
+    "rootNamespace": "Dre0Dru.UI.Screens.UGUI",
     "references": [
+        "GUID:1bfe606c45b738d4bb7714dc4e6d0b7e",
         "GUID:858f01292afdc66489a4648c01d9ca1e"
     ],
     "includePlatforms": [],

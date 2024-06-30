@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Dre0Dru.Screens.UGUI.Popups
+namespace Dre0Dru.UI.Screens.UGUI.Popups
 {
     public class PopupsService<TPopupBase, TPopupsSource> : MonoBehaviour, IPopupsService<TPopupBase>
         where TPopupBase : Component, IScreen, IPooledScreen, ISelfCloseableScreen<TPopupBase>
