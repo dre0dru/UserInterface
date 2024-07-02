@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace Dre0Dru.UI.Screens.UGUI.Panels
 {
-    //TODO do not make openable/closeable by default, make separate implementation
     public class PanelsService<TPanelBase, TPanelsSource> : MonoBehaviour, IPanelsService<TPanelBase>
-        where TPanelBase : Component, IScreen, ISelfOpenableScreen, ISelfCloseableScreen
+        where TPanelBase : IScreen
         where TPanelsSource : IScreensSource<TPanelBase>
     {
         public event Action<TPanelBase, ScreenState> StateChanged;
@@ -16,11 +15,6 @@ namespace Dre0Dru.UI.Screens.UGUI.Panels
         private TPanelsSource _source;
 
         protected TPanelsSource Source => _source;
-
-        protected virtual void Awake()
-        {
-            SetOpenCloseHandles();
-        }
 
         protected virtual void OnDestroy()
         {
@@ -31,7 +25,6 @@ namespace Dre0Dru.UI.Screens.UGUI.Panels
             where TPanel : TPanelBase
         {
             var panel = _source.Get<TPanel>();
-
 
             return panel;
         }
@@ -69,16 +62,6 @@ namespace Dre0Dru.UI.Screens.UGUI.Panels
         public IEnumerator<TPanelBase> GetEnumerator()
         {
             return _source.GetEnumerator();
-        }
-
-        protected void SetOpenCloseHandles()
-        {
-            foreach (var panel in _source)
-            {
-                var handle = new ScreenOpenCloseHandle<TPanelBase>(this);
-                panel.OpenHandle = handle;
-                panel.CloseHandle = handle;
-            }
         }
 
         protected void ClearEventHandlers()

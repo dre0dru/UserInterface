@@ -2,6 +2,7 @@
 
 namespace Dre0Dru.UI.Screens
 {
+    //TODO split into CreationSource and DestroySource (instead of ScreenDestroyStrategy)?
     public interface IScreensSource<TScreenBase> : IEnumerable<TScreenBase>
         where TScreenBase : IScreen
     {
@@ -14,11 +15,5 @@ namespace Dre0Dru.UI.Screens
     {
         TScreen GetPrefab<TScreen>()
             where TScreen : TPrefab;
-    }
-
-    public interface IPooledSource<TScreenBase> : IScreensSource<TScreenBase>
-        where TScreenBase : IScreen, IPooledScreen
-    {
-        void ReturnToPool(TScreenBase screen);
     }
 }

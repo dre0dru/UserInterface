@@ -5,11 +5,9 @@ using UnityEngine;
 
 namespace Dre0Dru.UI.Screens.UGUI.Popups
 {
-    //TODO do not make openable/closeable by default, make separate implementation
-    //TODO also do not make pooled by default
     public class PopupsService<TPopupBase, TPopupsSource> : MonoBehaviour, IPopupsService<TPopupBase>
-        where TPopupBase : Component, IScreen, IPooledScreen, ISelfCloseableScreen
-        where TPopupsSource : IPooledSource<TPopupBase>
+        where TPopupBase : IScreen
+        where TPopupsSource : IScreensSource<TPopupBase>, IScreenDestroyStrategy<TPopupBase>
     {
         public event Action<TPopupBase, ScreenState> StateChanged;
 
@@ -35,11 +33,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
         public virtual TPopup Create<TPopup>()
             where TPopup : TPopupBase
         {
-            var popup = _source.Get<TPopup>();
-
-            popup.CloseHandle = new ScreenOpenCloseHandle<TPopupBase>(this);
-
-            return popup;
+            return _source.Get<TPopup>();
         }
 
         public virtual bool TryGet<TPopup>(out TPopup popup)
@@ -47,7 +41,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
         {
             if (_openedPopups.TryGetValue(typeof(TPopup), out var popupBase))
             {
-                popup = popupBase as TPopup;
+                popup = (TPopup)popupBase;
                 return true;
             }
 
@@ -58,10 +52,6 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
         public virtual void Open(TPopupBase popupBase, bool skipAnimation)
         {
             var type = popupBase.GetType();
-
-            var popupTransform = popupBase.transform;
-            popupTransform.SetParent(_root);
-            popupTransform.SetAsLastSibling();
 
             if (!_openedPopups.TryAdd(type, popupBase))
             {
@@ -91,14 +81,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
             {
                 StateChanged?.Invoke(popupBase, ScreenState.Closed);
 
-                if (popupBase.IsPooled)
-                {
-                    _source.ReturnToPool(popupBase);
-                }
-                else
-                {
-                    Destroy(popupBase.gameObject);
-                }
+                _source.Destroy(popupBase);
             }, skipAnimation);
         }
 
