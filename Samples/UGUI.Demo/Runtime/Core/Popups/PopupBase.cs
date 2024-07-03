@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 
-namespace Dre0Dru.UI.Screens.UGUI.Popups
+namespace Dre0Dru.UI.Screens.UGUI.Demo.Popups
 {
-    public class PopupBase : ScreenBase, IPooledScreen, ISelfCloseableScreen
+    public class PopupBase : CanvasPopupBase, IPooledScreen, ISelfCloseableScreen
     {
         [SerializeField]
         private bool _isPooled;
 
         public bool IsPooled => _isPooled;
 
-        private ICloseHandle CloseHandle { get; set; }
-
-        ICloseHandle ISelfCloseableScreen.CloseHandle
-        {
-            set => CloseHandle = value;
-        }
+        //TODO вынести это в Core asmdef и сделать internal
+        public ICloseHandle CloseHandle { private get; set; }
 
         void IPooledScreen.ResetOnReturnToPool()
         {

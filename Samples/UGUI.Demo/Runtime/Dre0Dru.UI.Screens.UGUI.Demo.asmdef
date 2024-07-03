@@ -1,0 +1,19 @@
+{
+    "name": "Dre0Dru.UI.Screens.UGUI.Demo",
+    "rootNamespace": "Dre0Dru.UI.Screens.UGUI.Demo",
+    "references": [
+        "GUID:1bfe606c45b738d4bb7714dc4e6d0b7e",
+        "GUID:6fe9eb6d6f5c8a245ad96081d1fa66d6",
+        "GUID:262d417db9b8cd94898dfb116be7eae5",
+        "GUID:858f01292afdc66489a4648c01d9ca1e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

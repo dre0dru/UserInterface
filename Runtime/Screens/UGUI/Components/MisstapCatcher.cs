@@ -26,7 +26,10 @@ namespace Dre0Dru.UI.Screens.UGUI.Components
 
         private void Close()
         {
-            _screen.Close(_skipAnimation);
+            if (_screen != null)
+            {
+                _screen.Close(_skipAnimation);
+            }
         }
     }
 }

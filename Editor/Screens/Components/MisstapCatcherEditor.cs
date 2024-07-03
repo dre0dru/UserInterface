@@ -4,7 +4,7 @@ using UnityEditor.UI;
 
 namespace Dre0Dru.UI.Screens.Editor.Components
 {
-    [CanEditMultipleObjects, CustomEditor(typeof(MisstapCatcher<>), false)]
+    [CanEditMultipleObjects, CustomEditor(typeof(MisstapCatcher<>), true)]
     public class MisstapCatcherEditor : ButtonEditor
     {
         private SerializedProperty _screenProperty;
