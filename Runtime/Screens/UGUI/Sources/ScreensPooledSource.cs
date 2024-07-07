@@ -22,12 +22,16 @@ namespace Dre0Dru.UI.Screens.UGUI.Sources
 
         public override TScreen Get<TScreen>()
         {
-            var screen = _pooledPopups.SingleOrDefault(popup => popup.GetType() == typeof(TScreen)) as TScreen;
+            var screen = _pooledPopups.FirstOrDefault(popup => popup.GetType() == typeof(TScreen)) as TScreen;
 
             if (screen == null)
             {
                 var prefab = _prefabsSource.GetPrefab<TScreen>();
                 screen = Instantiate(prefab);
+            }
+            else
+            {
+                _pooledPopups.Remove(screen);
             }
 
             var screenTransform = screen.transform;

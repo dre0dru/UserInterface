@@ -7,12 +7,13 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Popups
     public interface ICounterViewPresenter : IPresenter
     {
         event Action<int> CountChanged;
+        int Count { get; }
 
         void IncreaseCount();
         void DecreaseCount();
     }
 
-    public class CounterView : MonoBehaviour, IPresentable<ICounterViewPresenter>
+    public class CounterView : MonoBehaviour, IPresentable<ICounterViewPresenter>, IDisposable
     {
         [SerializeField]
         private Button _increaseCountButton;
@@ -35,7 +36,14 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Popups
         {
             _presenter = presenter;
 
+            SetCount(_presenter.Count);
+
             _presenter.CountChanged += OnCountChanged;
+        }
+
+        public void Dispose()
+        {
+            _presenter.CountChanged -= OnCountChanged;
         }
 
         private void OnIncreaseCount()
@@ -49,6 +57,11 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Popups
         }
 
         private void OnCountChanged(int count)
+        {
+            SetCount(count);
+        }
+
+        private void SetCount(int count)
         {
             _countText.text = count.ToString();
         }

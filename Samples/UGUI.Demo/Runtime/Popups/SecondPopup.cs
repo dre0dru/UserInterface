@@ -32,6 +32,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Popups
         {
             _presenter = presenter;
             AddDisposable(_presenter);
+            AddDisposable(_counterView);
         }
 
         public void SetPresenter(ICounterViewPresenter presenter)

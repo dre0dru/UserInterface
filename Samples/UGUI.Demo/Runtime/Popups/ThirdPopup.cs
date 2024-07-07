@@ -25,6 +25,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Popups
         {
             _counterView.SetPresenter(presenter);
             AddDisposable(presenter);
+            AddDisposable(_counterView);
         }
     }
 }

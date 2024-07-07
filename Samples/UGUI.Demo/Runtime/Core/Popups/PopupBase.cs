@@ -15,6 +15,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Popups
         void IPooledScreen.ResetOnReturnToPool()
         {
             ClearEventHandlers();
+            OnReturnToPool();
         }
 
         protected virtual void OnReturnToPool()

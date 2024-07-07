@@ -17,6 +17,8 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Application.Popups
             _counter.CountChanged += OnCountChanged;
         }
 
+        public int Count => _counter.Count;
+
         public virtual void IncreaseCount()
         {
             _counter.IncreaseCount();

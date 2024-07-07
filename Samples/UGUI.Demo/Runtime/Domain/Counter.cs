@@ -8,6 +8,8 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Domain
 
         private int _count;
 
+        public int Count => _count;
+
         public void IncreaseCount()
         {
             _count++;
