@@ -2,17 +2,24 @@
   "name": "com.dre0dru.userinterface",
   "version": "3.0.0",
   "displayName": "User Interface",
-  "description": "Package Description",
+  "description": "Tools and services to manage user interface",
   "keywords": [
-    "Unity"
+    "Unity", "User Interface", "UI", "UGUI"
   ],
   "author": {
     "name": "Dre0Dru",
     "url": "https://github.com/dre0dru"
   },
   "license": "MIT",
-  "documentationUrl": "https://github.com/dre0dru",
-  "changelogUrl": "https://github.com/dre0dru",
-  "licensesUrl": "https://github.com/dre0dru",
-  "type": "library"
+  "documentationUrl": "https://github.com/dre0dru/UserInterface/blob/master/README.md",
+  "changelogUrl": "https://github.com/dre0dru/UserInterface/blob/master/CHANGELOG.md",
+  "licensesUrl": "https://github.com/dre0dru/UserInterface/blob/master/LICENSE.md",
+  "type": "library",
+  "samples": [
+  {
+    "displayName": "Screens UGUI Demo",
+    "description": "Sample implementation to serve as a reference/starting point",
+    "path": "Samples~/UGUI.Demo"
+  }
+]
 }
