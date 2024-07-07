@@ -49,7 +49,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
             return false;
         }
 
-        public virtual void Open(TPopupBase popupBase, bool skipAnimation)
+        public virtual void Open(TPopupBase popupBase, bool skipAnimation = false)
         {
             var type = popupBase.GetType();
 
@@ -66,7 +66,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Popups
             }, skipAnimation);
         }
 
-        public virtual void Close(TPopupBase popupBase, bool skipAnimation)
+        public virtual void Close(TPopupBase popupBase, bool skipAnimation = false)
         {
             var type = popupBase.GetType();
 

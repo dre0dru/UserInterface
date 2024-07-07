@@ -6,7 +6,6 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Application.Popups
     {
         public void Dispose()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

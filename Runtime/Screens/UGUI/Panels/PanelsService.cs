@@ -29,7 +29,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Panels
             return panel;
         }
 
-        public virtual void Open(TPanelBase popupBase, bool skipAnimation)
+        public virtual void Open(TPanelBase popupBase, bool skipAnimation = false)
         {
             if (!popupBase.IsClosedOrClosing())
             {
@@ -44,7 +44,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Panels
             }, skipAnimation);
         }
 
-        public virtual void Close(TPanelBase popupBase, bool skipAnimation)
+        public virtual void Close(TPanelBase popupBase, bool skipAnimation = false)
         {
             if (!popupBase.IsOpenedOrOpening())
             {

@@ -35,11 +35,8 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Application.Panels
         //Not specifying layer, will be opened on default layer (overlay)
         public void OpenThirdPopup()
         {
-            var popup = _popupsServiceLayers.Create<ThirdPopup>()
-                .SetPresenter<ThirdPopup, IThirdPopupPresenter>(_presentersFactory.CreateThirdPopupPresenter())
-                .SetPresenter<ThirdPopup, ICounterViewPresenter>(_presentersFactory.CreateCounterViewMultiplierPresenter());
-
-            _popupsServiceLayers.Open(popup);
+            _popupsServiceLayers.OpenWithPresenter<ThirdPopup, ICounterViewPresenter>(_presentersFactory
+                .CreateCounterViewMultiplierPresenter());
         }
 
         void IDisposable.Dispose()

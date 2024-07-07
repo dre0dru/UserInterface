@@ -17,20 +17,19 @@ namespace Dre0Dru.UI.Screens.UGUI.Demo.Application.Popups
 
         public void OpenSecondPopup()
         {
-            var popup = _popupsServiceLayers.Get(ScreenLayers.Foreground).Create<SecondPopup>()
+            var layer = _popupsServiceLayers.Get(ScreenLayers.Foreground);
+
+            var popup = layer.Create<SecondPopup>()
                 .SetPresenter<SecondPopup, ISecondPopupPresenter>(_presentersFactory.CreateSecondPopupPresenter())
                 .SetPresenter<SecondPopup, ICounterViewPresenter>(_presentersFactory.CreateCounterViewPresenter());
 
-            _popupsServiceLayers.Open(popup);
+            layer.Open(popup);
         }
 
         public void OpenThirdPopup()
         {
-            var popup = _popupsServiceLayers.Create<ThirdPopup>()
-                .SetPresenter<ThirdPopup, IThirdPopupPresenter>(_presentersFactory.CreateThirdPopupPresenter())
-                .SetPresenter<ThirdPopup, ICounterViewPresenter>(_presentersFactory.CreateCounterViewMultiplierPresenter());
-
-            _popupsServiceLayers.Open(popup);
+            _popupsServiceLayers.OpenWithPresenter<ThirdPopup, ICounterViewPresenter>(_presentersFactory
+                .CreateCounterViewMultiplierPresenter());
         }
 
         void IDisposable.Dispose()
