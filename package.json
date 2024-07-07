@@ -1,10 +1,13 @@
 {
   "name": "com.dre0dru.userinterface",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "displayName": "User Interface",
   "description": "Tools and services to manage user interface",
   "keywords": [
-    "Unity", "User Interface", "UI", "UGUI"
+    "Unity",
+    "User Interface",
+    "UI",
+    "UGUI"
   ],
   "author": {
     "name": "Dre0Dru",
@@ -16,10 +19,10 @@
   "licensesUrl": "https://github.com/dre0dru/UserInterface/blob/master/LICENSE.md",
   "type": "library",
   "samples": [
-  {
-    "displayName": "Screens UGUI Demo",
-    "description": "Sample implementation to serve as a reference/starting point",
-    "path": "Samples~/UGUI.Demo"
-  }
-]
+    {
+      "displayName": "Screens UGUI Demo",
+      "description": "Sample implementation to serve as a reference/starting point",
+      "path": "Samples~/UGUI.Demo"
+    }
+  ]
 }
