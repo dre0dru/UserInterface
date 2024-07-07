@@ -31,7 +31,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Sources
             }
 
             var screenTransform = screen.transform;
-            screenTransform.SetParent(_screensRoot);
+            screenTransform.SetParent(_screensRoot, false);
             screenTransform.SetAsLastSibling();
 
             return screen;

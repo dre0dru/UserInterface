@@ -22,6 +22,8 @@ namespace Dre0Dru.UI.Screens.UGUI
             }
         }
 
+        protected ScreenAnimation Animation => _animation;
+
         public event Action<ScreenState> StateChanged;
 
         protected virtual void OnDestroy()

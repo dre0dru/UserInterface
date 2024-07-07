@@ -84,7 +84,6 @@ GameObject:
   - component: {fileID: 1705841904104530413}
   - component: {fileID: 1482520565615171515}
   - component: {fileID: 4360826384523010450}
-  - component: {fileID: 197579808089337222}
   m_Layer: 5
   m_Name: PopupBase
   m_TagString: Untagged
@@ -166,21 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dba685525c54145bd5aed8fba99716e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screenAnimation: {fileID: 197579808089337222}
+  _screenAnimation: {fileID: 0}
   _raycastBlocker: {fileID: 4454691897385245639}
---- !u!114 &197579808089337222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8245717705477473397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8b22d061254f949fe86aa36f9cd106, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _root: {fileID: 8245717705477473397}
 --- !u!1001 &2655772565768363054
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ namespace Dre0Dru.UI.Screens.UGUI.Sources
         public override TScreen Get<TScreen>()
         {
             var prefab = _prefabsSource.GetPrefab<TScreen>();
-            return Instantiate(prefab, _root);
+            return Instantiate(prefab, _root, false);
         }
 
         public override IEnumerator<TScreenBase> GetEnumerator()
